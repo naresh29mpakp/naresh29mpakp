@@ -20,7 +20,8 @@ def validate_pincode(zipcode):
                 area_info = data[0]['PostOffice'][0]
                 state_name = area_info['State']
                 area_name = area_info['Name']
-                if state_name.lower() == "tamil nadu":
+                # Check for both Tamil Nadu and Kerala
+                if state_name.lower() in ["tamil nadu", "kerala"]:
                     return area_name, state_name
                 else:
                     return None, None
@@ -28,6 +29,7 @@ def validate_pincode(zipcode):
     except requests.exceptions.RequestException:
         st.error("API request failed. Please try again later.")
         return None, None
+
 
 # Title and description
 st.title("Indian House Price Prediction")
