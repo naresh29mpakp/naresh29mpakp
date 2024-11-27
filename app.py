@@ -9,7 +9,6 @@ from datetime import datetime
 with open('house_price_model.pkl', 'rb') as file:
     loaded_model = pickle.load(file)
 
-# Function to validate if pincode belongs to Tamil Nadu
 def validate_pincode(zipcode):
     url = f"https://api.postalpincode.in/pincode/{zipcode}"
     try:
