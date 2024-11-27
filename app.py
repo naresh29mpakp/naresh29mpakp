@@ -19,7 +19,7 @@ def validate_pincode(zipcode):
                 area_info = data[0]['PostOffice'][0]
                 state_name = area_info['State']
                 area_name = area_info['Name']
-                # Check for both Tamil Nadu and Kerala
+                # Check for Tamil Nadu or Kerala
                 if state_name.lower() in ["tamil nadu", "kerala"]:
                     return area_name, state_name
                 else:
@@ -83,7 +83,7 @@ price_per_bedroom = sqft_living / bedrooms if bedrooms != 0 else 0
 if st.button("Predict Price"):
     area_name, state_name = validate_pincode(pincode)
 
-    if state_name == "Tamil Nadu":
+    if state_name in ["Tamil Nadu", "Kerala"]:
         # Create DataFrame for prediction
         new_data = pd.DataFrame({
             'Sqft_Living': [sqft_living],
@@ -116,4 +116,4 @@ if st.button("Predict Price"):
         st.markdown(f"<strong>Predicted House Price:</strong> ₹{predicted_price[0]:,.2f}", unsafe_allow_html=True)
 
     else:
-        st.error("The provided pincode does not belong to Tamil Nadu or is invalid.")
+        st.error("The provided pincode does not belong to Tamil Nadu or Kerala, or is invalid.")
